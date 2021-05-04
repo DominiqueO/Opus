@@ -64,25 +64,21 @@ This function creates a specified number (*_initialSupply*) of a new type of tok
 The ***mint*** function is the primary procedure to mint new tokens under the Opus tokenization protocol. The ***mint*** function allows for newly minted tokens to be directly transferred to an arbitrary number of accounts. The order of the addresses (*_to*) has to match the order of the token amounts (*_quantities*) and the two arrays have to be of the same size. The ***mint*** function can only be called by the creator of the token type, i.e. the caller of the *create* function for this token type. 
 
 ```solidity
- // Batch mint tokens. Assign directly to _to[].
-    function mint(uint256 _id, address[] calldata _to, uint256[] calldata _quantities) external creatorOnly(_id) {
-
-        for (uint256 i = 0; i < _to.length; ++i) {
-
-            address to = _to[i];
-            uint256 quantity = _quantities[i];
-
-            // Grant the items to the caller
-            balances[_id][to] = quantity.add(balances[_id][to]);
-
-            // Emit the Transfer/Mint event.
-            // the 0x0 source address implies a mint
-            // It will also provide the circulating supply info.
-            emit TransferSingle(msg.sender, address(0x0), to, _id, quantity);
-
-            if (to.isContract()) {
-                _doSafeTransferAcceptanceCheck(msg.sender, msg.sender, to, _id, quantity, '');
-            }
-        }
+    function mint(address account, uint256 id, uint256 amount, bytes memory data)
+        public
+    {
+        require(hasRole(MINTER_ROLE, msg.sender));
+        _mint(account, id, amount, data);
     }
+
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+        public
+    {
+        require(hasRole(MINTER_ROLE, msg.sender));
+        _mintBatch(to, ids, amounts, data);
+    }
+
 ```
+
+## Access and Governance
+
