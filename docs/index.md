@@ -23,8 +23,10 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 The constructor only performs two actions, it initializes the nonce to zero and it specifies a governance address, which technically can be either an account or a smart contract. 
 ```solidity
    constructor(address governance_) public ERC1155Mintable() {
-        governance = governance_;
-        nonce = 0; // ID is initialized to zero
+        // governance address 
+        governance = governance_; 
+        // nonce is initialized to zero, ensures unambiguous ID for each token type
+        nonce = 0; 
     }
 
 ```
