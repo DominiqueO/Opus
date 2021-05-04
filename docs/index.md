@@ -7,7 +7,7 @@ The Opus tokenization protocol is a solution to the tokenization of physical ass
 The Opus contract
 | Contract / Standard |  Role |
 | :-- | :-- |
-| ERC1155 | transactions |
+| [ERC1155](https://eips.ethereum.org/EIPS/eip-1155) | transactions |
 | ERC1155Mintable | minting / creation of tokens |
 | ERC1155Metadata | metadata specification / handling |
 | ERC165 | interface compatibility |
@@ -16,10 +16,7 @@ The Opus contract
 ## Base Contract
 
 The base contract includes all mandatory functions of the ERC-1155 standard. In this prototype the ERC-1155 standard is implemented by inheritance of an ERC-1155 contract optimized for minting new tokens in an already deployed smart contract (“ERC1155Mintable”). Transactions and metadata are handled according to the procedures specified in the [ERC-1155 whitepaper](https://eips.ethereum.org/EIPS/eip-1155). 
-```solidity
-    function mint(uint256 _id, address[] calldata _to, uint256[] calldata _quantities) external creatorOnly(_id) {
 
-```
 
 ## Transactions
 Transaction are handled according to the procedures in the [ERC-1155 whitepaper](https://eips.ethereum.org/EIPS/eip-1155) to guarantee compatibility. 
