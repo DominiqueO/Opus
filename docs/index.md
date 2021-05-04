@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Opus Token: Technical Documentation
 
 You can use the [editor on GitHub](https://github.com/DominiqueO/Opus/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
 
