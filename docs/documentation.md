@@ -60,7 +60,7 @@ This function creates a specified number (*_initialSupply*) of a new type of tok
     }
 ```
 
-### The ***mint*** Function
+### The ***mint*** Function and *mintBatch* function
 The ***mint*** function is the primary procedure to mint new tokens under the Opus tokenization protocol. The ***mint*** function allows for newly minted tokens to be directly transferred to an arbitrary number of accounts. The order of the addresses (*_to*) has to match the order of the token amounts (*_quantities*) and the two arrays have to be of the same size. The ***mint*** function can only be called by the creator of the token type, i.e. the caller of the *create* function for this token type. 
 
 ```solidity
