@@ -14,7 +14,8 @@ The base contract includes all mandatory functions of the ERC-1155 standard. In 
 ## Transactions
 Transaction are handled according to the procedures in the [ERC-1155 whitepaper](https://eips.ethereum.org/EIPS/eip-1155) to guarantee compatibility. 
 
-
+## Token Types and Identifiers
+Token types are referred to by a unique identifier (ID) as specified in the ERC-1155 standard. In contrast to standards such as ERC-20, the identifier of integer type is the only way to refer to a token; symbols and other strings may not be used. Provided it is of integer type, the choice of identifier can be arbitrary. In the **Opus** contract, a variable of integer type called *nonce* (inherited from the *ERC1155Mintable* contract) keeps track of the token IDs and ensures that the ID of each token type is unique. *nonce* is initalized to 0 in the deployment of the contract and subsequently incremented each time the *create* function is called.
 
 ## Constructor and Deployment
 
@@ -28,3 +29,21 @@ The constructor only performs two actions, it initializes the nonce to zero and 
     }
 
 ```
+
+## Creating and Minting Tokens
+Two functions are involved in the minting of tokens: The *create* function creates a new token type. The *mint* function mints additional tokens of an existing token type.
+```solidity
+    // Creates a new token type and assigns _initialSupply to minter
+    function create(uint256 _initialSupply, string calldata _uri) external returns(uint256 _id) {
+
+        _id = ++nonce;
+        creators[_id] = msg.sender;
+        balances[_id][msg.sender] = _initialSupply;
+
+        // Transfer event with mint semantic
+        emit TransferSingle(msg.sender, address(0x0), msg.sender, _id, _initialSupply);
+
+        if (bytes(_uri).length > 0)
+            emit URI(_uri, _id);
+    }
+´´´
