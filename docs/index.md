@@ -1,10 +1,16 @@
 # Opus Token: Technical Documentation
 
 ## Introduction
-The Opus tokenization protocol is a solution to the tokenization of physical assets based on the ERC-1155 token standard. Compatibility and modularity both have high priority in the design of the Opus token. Therefore, the Opus token includes all mandatory functions of the ERC-1155 standard to achieve full compatibility with the ERC-1155 ecosystem and security through maturity. 
+The Opus tokenization protocol is a solution to the tokenization of physical assets based on the ERC-1155 token standard. The tokenization protocol consists of a base contract of the ERC-1155 standard with minting function inherited from the *ERC1155Mintable.sol* contract and ERC-1155 compatible metadata extensions. Additional compliance functionalities (address whitelisting) can be included as needed. Compatibility and modularity both have high priority in the design of the Opus token. Therefore, the Opus token includes all mandatory functions of the ERC-1155 standard to achieve full compatibility with the ERC-1155 ecosystem and security through maturity. 
 
 ## Dependencies and Inheritances
-
+The Opus contract
+| Standard | Role |
+| ERC1155 | transactions |
+| ERC1155Mintable | minting / creation of tokens |
+| ERC1155Metadata | metadata specification / handling |
+| ERC165 | interface compatibility |
+| ERC2477 | metadata integrity |
 
 ## Base Contract
 
