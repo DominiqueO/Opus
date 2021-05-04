@@ -5,7 +5,8 @@ The Opus tokenization protocol is a solution to the tokenization of physical ass
 
 ## Dependencies and Inheritances
 The Opus contract
-| Standard | Role |
+| Header Contract / Standard | Header Role |
+| :-- | :-- |
 | ERC1155 | transactions |
 | ERC1155Mintable | minting / creation of tokens |
 | ERC1155Metadata | metadata specification / handling |
