@@ -1,8 +1,7 @@
 # Opus Token: Technical Documentation
 
-You can use the [editor on GitHub](https://github.com/DominiqueO/Opus/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Introduction
+The Opus token is a solution to the tokenization of physical assets based on the ERC-1155 token standard. Compatibility and modularity both have high priority in the design of the Opus token. Therefore, the Opus token includes all mandatory functions of the ERC-1155 standard to achieve full compatibility with the ERC-1155 ecosystem and security through maturity. 
 
 ### Markdown
 
