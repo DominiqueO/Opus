@@ -12,6 +12,7 @@ The Opus contract
 | ERC1155Metadata | metadata specification / handling |
 | ERC165 | interface compatibility |
 | ERC2477 | metadata integrity |
+| ERC1405 | whitelisting |
 
 ## Base Contract
 
