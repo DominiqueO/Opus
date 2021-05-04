@@ -36,8 +36,8 @@ The constructor only performs two actions, it initializes the nonce to zero and 
 ## Creating and Minting Tokens
 Two functions are involved in the minting of tokens: The *create* function creates a new token type. The *mint* function mints additional tokens of an existing token type. Both of these functions are inherited from *ERC1155Mintable.sol*. 
 
-### The *create* function
-This function creates a specified number (*_initialSupply*) of a new type of token. The new tokens are assigned to the minter / caller of the *create* functions. *_initialSupply* can be set to 0, if a new type of token should be created initially without creating any tokens. Governance over a specified token type is automatically yielded to creator of said token type (caller of the *create* function instance used to create the token type). 
+### The ***create*** function
+This function creates a specified number (*_initialSupply*) of a new type of token. The new tokens are assigned to the minter / caller of the ***create*** functions. *_initialSupply* can be set to 0, if a new type of token should be created initially without creating any tokens. Governance over a specified token type is automatically yielded to creator of said token type (caller of the ***create*** function instance used to create the token type). 
 
 ```solidity
     // Creates a new token type and assigns _initialSupply to minter
@@ -55,8 +55,8 @@ This function creates a specified number (*_initialSupply*) of a new type of tok
     }
 ```
 
-### The *mint* Function
-The *mint* function is the primary procedure to mint new tokens under the Opus tokenization protocol. The *mint* function allows for newly minted tokens to be directly transferred to an arbitrary number of accounts. The order of the addresses (*_to*) has to match the order of the token amounts (*_quantities*) and the two arrays have to be of the same size. The *mint* function can only be called by the creator of the token type, i.e. the caller of the *create* function for this token type. 
+### The ***mint*** Function
+The ***mint*** function is the primary procedure to mint new tokens under the Opus tokenization protocol. The ***mint*** function allows for newly minted tokens to be directly transferred to an arbitrary number of accounts. The order of the addresses (*_to*) has to match the order of the token amounts (*_quantities*) and the two arrays have to be of the same size. The ***mint*** function can only be called by the creator of the token type, i.e. the caller of the *create* function for this token type. 
 
 ```solidity
  // Batch mint tokens. Assign directly to _to[].
