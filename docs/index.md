@@ -11,12 +11,10 @@ The base contract includes all mandatory functions of the ERC-1155 standard. In 
 
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
 ## Transactions
 Transaction are handled according to the procedures in the [ERC-1155 whitepaper](https://eips.ethereum.org/EIPS/eip-1155) to guarantee compatibility. 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/DominiqueO/Opus/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
 
 ## Constructor and Deployment
 
