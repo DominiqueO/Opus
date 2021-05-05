@@ -80,7 +80,9 @@ The ***mint*** function is the primary procedure to mint new tokens under the Op
 ```
 
 ## Access and Governance
+The Opus tokenization framework is equipped with the flexible access control features of the OpenZeppelin [*AccessControl*](https://docs.openzeppelin.com/contracts/4.x/api/access) module. Access roles can be defined separately in the constructor of the smart contract. 
 
+## Metadata and Information Management
 
 
 
