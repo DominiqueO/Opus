@@ -9,9 +9,8 @@ The Opus framework is based on the OpenZeppelin implementations of the following
 | :-- | :-- |
 | [ERC1155](https://eips.ethereum.org/EIPS/eip-1155) | transactions |
 | ERC1155Metadata | metadata specification / handling |
-| ERC165 | interface compatibility |
+| ERC165 | interface compatibility check|
 | ERC2477 | metadata integrity |
-| ERC1405 | whitelisting |
 
 ## Base Contract
 
@@ -22,11 +21,11 @@ The base contract includes all mandatory functions of the ERC-1155 standard. In 
 Transaction are handled according to the procedures in the [ERC-1155 whitepaper](https://eips.ethereum.org/EIPS/eip-1155) to guarantee compatibility. 
 
 ## Token Types and Identifiers
-Token types are referred to by a unique identifier (ID) as specified in the ERC-1155 standard. In contrast to standards such as ERC-20, the identifier of integer type is the only way to refer to a token; symbols and other strings may not be used. Provided it is of integer type, the choice of identifier can be arbitrary. In the **Opus** contract, a variable of integer type called *nonce* (inherited from the *ERC1155Mintable* contract) keeps track of the token IDs and ensures that the ID of each token type is unique. *nonce* is initalized to 0 in the deployment of the contract and subsequently incremented each time the *create* function is called.
+Token types are referred to by a unique identifier (ID) as specified in the ERC-1155 standard. In contrast to standards such as ERC-20, the identifier of integer type is the only way to refer to a token; symbols and other strings may not be used. Provided it is of integer type, the choice of identifier can be arbitrary. 
 
 ## Constructor and Deployment
+The constructor 
 
-The constructor only performs two actions, it initializes the nonce to zero and it specifies a governance address, which technically can be either an account or a smart contract. 
 ```solidity
     constructor()
         ERC1155("https://github.com/DominiqueO/Opus/tree/main/metadata/{id}.json")
@@ -39,29 +38,10 @@ The constructor only performs two actions, it initializes the nonce to zero and 
 ```
 
 ## Creating and Minting Tokens
-Two functions are involved in the minting of tokens: The *create* function creates a new token type. The *mint* function mints additional tokens of an existing token type. Both of these functions are inherited from *ERC1155Mintable.sol*. 
-
-### The ***create*** function
-This function creates a specified number (*_initialSupply*) of a new type of token. The new tokens are assigned to the minter / caller of the ***create*** functions. *_initialSupply* can be set to 0, if a new type of token should be created initially without creating any tokens. Governance over a specified token type is automatically yielded to creator of said token type (caller of the ***create*** function instance used to create the token type). 
-
-```solidity
-    // Creates a new token type and assigns _initialSupply to minter
-    function create(uint256 _initialSupply, string calldata _uri) external returns(uint256 _id) {
-
-        _id = ++nonce;
-        creators[_id] = msg.sender;
-        balances[_id][msg.sender] = _initialSupply;
-
-        // Transfer event with mint semantic
-        emit TransferSingle(msg.sender, address(0x0), msg.sender, _id, _initialSupply);
-
-        if (bytes(_uri).length > 0)
-            emit URI(_uri, _id);
-    }
-```
+Two functions are involved in the minting of tokens: 
 
 ### The *mint* and *mintBatch* Functions
-The ***mint*** function is the primary procedure to mint new tokens under the Opus tokenization protocol. The ***mint*** function allows for newly minted tokens to be directly transferred to an arbitrary number of accounts. The order of the addresses (*_to*) has to match the order of the token amounts (*_quantities*) and the two arrays have to be of the same size. The ***mint*** function can only be called by the creator of the token type, i.e. the caller of the *create* function for this token type. 
+The ***mint*** function and the ***mintBatch*** function have the same basic functionality. The ***mintBatch*** function can mint tokens of different types and directly transfer them to a specified account.
 
 ```solidity
     function mint(address account, uint256 id, uint256 amount, bytes memory data)
@@ -80,21 +60,14 @@ The ***mint*** function is the primary procedure to mint new tokens under the Op
 ```
 
 ## Access and Governance
-The Opus tokenization framework is equipped with the flexible access control features of the OpenZeppelin [*AccessControl*](https://docs.openzeppelin.com/contracts/4.x/api/access) module. Access roles can be defined separately in the constructor of the smart contract. 
+The Opus tokenization framework is equipped with the flexible access control features of the OpenZeppelin [*AccessControl*](https://docs.openzeppelin.com/contracts/4.x/api/access) module. Access roles can be defined in the constructor of the smart contract. Governance such as KYC and AML measures is also enforced through access control by the definition of the *WHITELISTED_ROLE* variable.
 
 ## Metadata and Information Management
-Metadata integrity is provided by hashing functions in accordance with the ERC-2477 standard:
-pragma solidity ^0.6.0;
+Metadata integrity can be provided by hashing functions in accordance with the proposal for the ERC-2477 standard:
 
 ```solidity
     function tokenURIIntegrity(uint256 tokenId) external view returns(bytes memory digest, string memory hashAlgorithm);
     
-    /**
-     * @notice Get the cryptographic hash for the specified tokenID's metadata schema
-     * @param tokenId Id of the Xcert.
-     * @return digest Bytes returned from the hash algorithm, or "" if not available
-     * @return hashAlgorithm The name of the cryptographic hash algorithm, or "" if not available
-     */
     function tokenURISchemaIntegrity(uint256 tokenId) external view returns(bytes memory digest, string memory hashAlgorithm);
 }
 ```
