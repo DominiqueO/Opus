@@ -77,10 +77,10 @@ The ***mint*** function is the primary procedure to mint new tokens under the Op
         require(hasRole(MINTER_ROLE, msg.sender));
         _mintBatch(to, ids, amounts, data);
     }
-
 ```
 
-## Access and Governance
+## Access and Governance
+
 
 
 
