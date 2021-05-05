@@ -84,7 +84,20 @@ The ***mint*** function is the primary procedure to mint new tokens under the Op
 The Opus tokenization framework is equipped with the flexible access control features of the OpenZeppelin [*AccessControl*](https://docs.openzeppelin.com/contracts/4.x/api/access) module. Access roles can be defined separately in the constructor of the smart contract. 
 
 ## Metadata and Information Management
+Metadata integrity is provided by hashing functions in accordance with the ERC-2477 standard:
+pragma solidity ^0.6.0;
 
-
+```solidity
+    function tokenURIIntegrity(uint256 tokenId) external view returns(bytes memory digest, string memory hashAlgorithm);
+    
+    /**
+     * @notice Get the cryptographic hash for the specified tokenID's metadata schema
+     * @param tokenId Id of the Xcert.
+     * @return digest Bytes returned from the hash algorithm, or "" if not available
+     * @return hashAlgorithm The name of the cryptographic hash algorithm, or "" if not available
+     */
+    function tokenURISchemaIntegrity(uint256 tokenId) external view returns(bytes memory digest, string memory hashAlgorithm);
+}
+```
 
 
