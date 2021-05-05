@@ -1,24 +1,25 @@
 {
-	"name": "Asset Name",
-	"description": "Lorem ipsum...",
-	"image": "https:\/\/s3.amazonaws.com\/your-bucket\/images\/{id}.png",
+	"name": "Marylin Monroe",
+	"description": "Lorem Ipsum..",
+	"image": "https://www.moma.org/collection/works/61240",
 	"properties": {
 		"simple_property": "example value",
-		"rich_property": {
-			"name": "Name",
-			"value": "123",
-			"display_value": "123 Example Value",
-			"class": "emphasis",
-			"css": {
-				"color": "#ffffff",
-				"font-weight": "bold",
-				"text-decoration": "underline"
+		"custodian": {
+			"name": "Museum of Modern Art",
+			"location": "40.7616°N 73.9776°W",
+			"address": "11 West 53rd Street, Manhattan, New York",
+			"country": "United States of America",
 			}
-		},
-		"array_property": {
-			"name": "Name",
-			"value": [1,2,3,4],
-			"class": "emphasis"
+		"provenance": {
+			"artist": "Andy Warhol",
+			"year": "1967",
+			"address": "11 West 53rd Street, Manhattan, New York",
+			"country": "United States of America",
+			}
+		"token": {
+			"name": "MARYLIN",
+			"total": "100'000",
+			"date": "2021",
+			}
 		}
-	}
 }
