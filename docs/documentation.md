@@ -29,13 +29,14 @@ Token types are referred to by a unique identifier (ID) as specified in the ERC-
 
 The constructor only performs two actions, it initializes the nonce to zero and it specifies a governance address, which technically can be either an account or a smart contract. 
 ```solidity
-   constructor(address governance_) public ERC1155Mintable() {
-        // governance address 
-        governance = governance_; 
-        // nonce is initialized to zero, ensures unambiguous ID for each token type
-        nonce = 0; 
+    constructor()
+        ERC1155("https://github.com/DominiqueO/Opus/tree/main/metadata/{id}.json")
+    {
+        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _setupRole(URI_SETTER_ROLE, msg.sender);
+        _setupRole(MINTER_ROLE, msg.sender);
+        _setupRole(WHITELISTED_ROLE, msg.sender);
     }
-
 ```
 
 ## Creating and Minting Tokens
